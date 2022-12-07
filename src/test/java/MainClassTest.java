@@ -15,4 +15,10 @@ public class MainClassTest {
     void testGetLocalNumberWrong() {
         Assertions.assertEquals(15, MainClass.getLocalNumber());
     }
+
+    @DisplayName("Тест на приватное поле класса (падающий)")
+    @Test
+    void testGetClassNumber(){
+        Assertions.assertTrue(MainClass.getClassNumber() > 45, "Число в приватном поле класса должно быть больше 45");
+    }
 }

@@ -21,4 +21,10 @@ public class MainClassTest {
     void testGetClassNumber(){
         Assertions.assertTrue(MainClass.getClassNumber() > 45, "Число в приватном поле класса должно быть больше 45");
     }
+
+    @DisplayName("Тест на строку с двойным условием")
+    @Test
+    void testGetClassString(){
+        Assertions.assertTrue((MainClass.getClassString().contains("Hello") | MainClass.getClassString().contains("world")), "Строка должна содержать Hello либо world либо оба");
+    }
 }

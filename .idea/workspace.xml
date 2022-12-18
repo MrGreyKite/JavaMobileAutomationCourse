@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="задание 2">
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="задание 3">
+      <change afterPath="$PROJECT_DIR$/src/test/java/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/apks/org.wikipedia.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MainClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainClassTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +38,41 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.MainClassTest.testGetClassString">
+  <component name="RunManager" selected="JUnit.AppTest">
+    <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AppTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppTest.firstAppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AppTest" />
+      <option name="METHOD_NAME" value="firstAppTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainClassTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MainClassTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainClassTest.testGetClassNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
@@ -62,21 +93,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainClassTest.testGetLocalNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainClassTest" />
-      <option name="METHOD_NAME" value="testGetLocalNumber" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AppTest" />
+        <item itemvalue="JUnit.AppTest.firstAppTest" />
+        <item itemvalue="JUnit.MainClassTest" />
         <item itemvalue="JUnit.MainClassTest.testGetClassString" />
         <item itemvalue="JUnit.MainClassTest.testGetClassNumber" />
-        <item itemvalue="JUnit.MainClassTest.testGetLocalNumber" />
       </list>
     </recent_temporary>
   </component>
@@ -110,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670455675838</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="задание 3">
+      <created>1670456340494</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670456340494</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,6 +158,17 @@
     <MESSAGE value="!" />
     <MESSAGE value="задание 1" />
     <MESSAGE value="задание 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="задание 2" />
+    <MESSAGE value="задание 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="задание 3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

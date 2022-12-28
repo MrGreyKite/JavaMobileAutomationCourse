@@ -125,5 +125,13 @@ public class AppTest {
         Assertions.assertTrue(new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.invisibilityOf(resultsParent)));
     }
 
+    //Урок 3, ДЗ-3
+    @Test
+    void searchAndFindResults() {
+        searchSomethingOnInput("Java");
+        WebElement resultsParent = waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
+        List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
+        results.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
+    }
 
 }

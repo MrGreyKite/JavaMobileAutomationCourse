@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 3, ДЗ1">
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 3, ДЗ2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AppTest.java" afterDir="false" />
     </list>
@@ -42,7 +42,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.AppTest.searchAndClose">
+  <component name="RunManager" selected="JUnit.AppTest.searchAndFindResults">
     <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
@@ -72,11 +72,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppTest.searchAttemptAndClose" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AppTest.searchAndFindResults" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AppTest" />
-      <option name="METHOD_NAME" value="searchAttemptAndClose" />
+      <option name="METHOD_NAME" value="searchAndFindResults" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -94,11 +94,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AppTest.searchAndFindResults" />
         <item itemvalue="JUnit.AppTest.searchAndClose" />
         <item itemvalue="JUnit.AppTest.searchInputHasRightText" />
         <item itemvalue="JUnit.AppTest" />
         <item itemvalue="JUnit.AppTest.firstAppTest" />
-        <item itemvalue="JUnit.AppTest.searchAttemptAndClose" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672193265462</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Урок 3, ДЗ2">
+      <created>1672194426119</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672194426119</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -189,7 +196,8 @@
     <MESSAGE value="ДЗ по уроку 2" />
     <MESSAGE value="образец с занятий" />
     <MESSAGE value="Урок 3, ДЗ1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Урок 3, ДЗ1" />
+    <MESSAGE value="Урок 3, ДЗ2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Урок 3, ДЗ2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

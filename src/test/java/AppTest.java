@@ -94,10 +94,17 @@ public class AppTest {
 
     //Урок 3, ДЗ-1
     private void assertElementHasText(By locator, String expectedText, String errorMessage) {
-
+        WebElement e = waitForElementPresent(locator, errorMessage);
+        Assertions.assertEquals(expectedText, e.getText(), errorMessage);
     }
 
-
+    @Test
+    void searchInputHasRightText() {
+        waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
+        assertElementHasText(By.id("org.wikipedia:id/search_src_text"),
+                "Search Wikipedia",
+                "Element doesn't have expected text");
+    }
 
 
 }

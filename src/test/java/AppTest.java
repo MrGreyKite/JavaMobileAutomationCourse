@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.List;
 
 public class AppTest {
 
@@ -104,6 +105,24 @@ public class AppTest {
         assertElementHasText(By.id("org.wikipedia:id/search_src_text"),
                 "Search Wikipedia",
                 "Element doesn't have expected text");
+    }
+
+    //Урок 3, ДЗ-2
+
+    private void searchSomethingOnInput(String query) {
+        waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), query, "Not found search input", 5);
+    }
+
+    @Test
+    void searchAndClose(){
+        searchSomethingOnInput("Appium");
+        WebElement resultsParent = waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
+        List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
+        Assertions.assertFalse(results.isEmpty());
+        waitForElementAndClick(By.xpath("//android.widget.ImageView[@content-desc='Clear query']"), "Not found close button", 5);
+
+        Assertions.assertTrue(new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.invisibilityOf(resultsParent)));
     }
 
 

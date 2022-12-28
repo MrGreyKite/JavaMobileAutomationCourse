@@ -1,15 +1,9 @@
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,8 +14,8 @@ public class AppTest {
 
     private static AppiumDriver driver;
 
-    @BeforeAll
-    static void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "PixelOreo8");
@@ -33,16 +27,19 @@ public class AppTest {
 
         driver = new AndroidDriver(new URL ("http://localhost:4723/wd/hub"), capabilities);
 
-    }
-
-    @BeforeEach
-    void skipOnboarding() {
         WebElement skipButton = driver.findElement(By.id("org.wikipedia:id/fragment_onboarding_skip_button"));
         skipButton.click();
+
     }
+
 
     @AfterEach
     public void tearDown() {
+        driver.quit();
+    }
+
+    @AfterAll
+    static void endDriver(){
         driver.quit();
     }
 
@@ -50,25 +47,49 @@ public class AppTest {
     void firstAppTest() {
         WebElement elementToInitSearch = driver.findElement(By.xpath("//*[contains(@text, 'Search Wikipedia')]"));
         elementToInitSearch.click();
-        WebElement elementToEnterSearchQuery = waitForElementPresentByXPath("//*[@resource-id='org.wikipedia:id/search_src_text']",
+        WebElement elementToEnterSearchQuery = this.waitForElementPresent(By.xpath("//*[@resource-id='org.wikipedia:id/search_src_text']"),
                 "Not found query input");
         elementToEnterSearchQuery.sendKeys("Java");
-        waitForElementPresentByXPath("//*[@class='android.view.ViewGroup']//*[@text='Object-oriented programming language']",
+        waitForElementPresent(By.xpath("//*[@class='android.view.ViewGroup']//*[@text='Object-oriented programming language']"),
                 "Not found object with needed text",
                 10);
     }
 
-    private WebElement waitForElementPresentByXPath(String xpath, String errorMessage, long timeout) {
+    @Test
+    void searchAttemptAndClose() {
+        waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), "App", "Not found search input", 5);
+        waitForElementAndClick(By.id("org.wikipedia:id/search_close_btn"), "Not found close button", 5);
+        waitForElementNotPresent(By.id("org.wikipedia:id/search_close_btn"), "Close button is still active", 10);
+    }
+
+    private WebElement waitForElementPresent(By by, String errorMessage, long timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         wait.withMessage(errorMessage + "\n");
-        By by = By.xpath(xpath);
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    private WebElement waitForElementPresentByXPath(String xpath, String errorMessage) {
-        return waitForElementPresentByXPath(xpath, errorMessage, 5);
+    private WebElement waitForElementPresent(By by, String errorMessage) {
+        return waitForElementPresent(by, errorMessage, 5);
     }
 
+    private WebElement waitForElementAndClick(By by, String errorMessage, long timeout){
+        WebElement e = waitForElementPresent(by, errorMessage, timeout);
+        e.click();
+        return e;
+    }
+
+    private WebElement waitForElementAndSendKeys(By by, String query, String errorMessage, long timeout){
+        WebElement e = waitForElementPresent(by, errorMessage, timeout);
+        e.sendKeys(query);
+        return e;
+    }
+
+    private Boolean waitForElementNotPresent(By by, String errorMessage, long timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        wait.withMessage(errorMessage + "\n");
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+    }
 
 
     //Урок 3, ДЗ-1
@@ -76,10 +97,6 @@ public class AppTest {
 
     }
 
-    @Test
-    void searchInputHasRightText() {
-
-    }
 
 
 

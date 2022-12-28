@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="ДЗ по уроку 2">
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="образец с занятий">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AppTest.java" afterDir="false" />
     </list>
@@ -42,7 +42,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.AppTest.firstAppTest">
+  <component name="RunManager" selected="JUnit.AppTest">
     <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
@@ -62,21 +62,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppTest.searchAttemptAndClose" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AppTest" />
+      <option name="METHOD_NAME" value="searchAttemptAndClose" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainClassTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="MainClassTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainClassTest.testGetClassNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainClassTest" />
-      <option name="METHOD_NAME" value="testGetClassNumber" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -93,11 +93,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppTest.firstAppTest" />
         <item itemvalue="JUnit.AppTest" />
+        <item itemvalue="JUnit.AppTest.firstAppTest" />
+        <item itemvalue="JUnit.AppTest.searchAttemptAndClose" />
         <item itemvalue="JUnit.MainClassTest" />
         <item itemvalue="JUnit.MainClassTest.testGetClassString" />
-        <item itemvalue="JUnit.MainClassTest.testGetClassNumber" />
       </list>
     </recent_temporary>
   </component>
@@ -145,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671396580785</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="образец с занятий">
+      <created>1672176937815</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672176937816</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,7 +172,8 @@
     <MESSAGE value="задание 2" />
     <MESSAGE value="задание 3" />
     <MESSAGE value="ДЗ по уроку 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="ДЗ по уроку 2" />
+    <MESSAGE value="образец с занятий" />
+    <option name="LAST_COMMIT_MESSAGE" value="образец с занятий" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -57,11 +57,22 @@ public class AppTest {
     }
 
     @Test
-    void searchAttemptAndClose() {
+    void doSearchAttemptAndClose() {
         waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
-        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), "App", "Not found search input", 5);
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), "App", "Not found query input", 5);
         waitForElementAndClick(By.id("org.wikipedia:id/search_close_btn"), "Not found close button", 5);
         waitForElementNotPresent(By.id("org.wikipedia:id/search_close_btn"), "Close button is still active", 10);
+    }
+
+    @Test
+    void testCompareArticleTitle() {
+        searchSomethingOnInput("Java");
+        String articleTitle = "Java (programming language)";
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + articleTitle + "']"),
+                "Not found needed article", 10);
+        assertElementHasText(By.xpath("//*[@resource-id='pcs-edit-section-title-description']/preceding-sibling::*[@class='android.widget.TextView']"),
+                articleTitle, "Not expected title");
+
     }
 
     private WebElement waitForElementPresent(By by, String errorMessage, long timeout) {
@@ -92,6 +103,22 @@ public class AppTest {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
+    private WebElement waitForElementAndClear(By by, String errorMessage, long timeout) {
+        WebElement e = waitForElementPresent(by, errorMessage, timeout);
+        e.clear();
+        return e;
+    }
+
+    private int getAmountOfElements(By locator){
+        List<WebElement> elements = driver.findElements(locator);
+        return elements.size();
+    }
+    private void assertElementNotPresent(By locator) {
+        if (getAmountOfElements(locator) > 0) {
+            throw new AssertionError("Element with locator '" + locator.toString() + "' should be not present");
+        }
+    }
+
 
     //Урок 3, ДЗ-1
     private void assertElementHasText(By locator, String expectedText, String errorMessage) {
@@ -100,7 +127,7 @@ public class AppTest {
     }
 
     @Test
-    void searchInputHasRightText() {
+    void testSearchInputHasRightText() {
         waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
         assertElementHasText(By.id("org.wikipedia:id/search_src_text"),
                 "Search Wikipedia",
@@ -111,11 +138,11 @@ public class AppTest {
 
     private void searchSomethingOnInput(String query) {
         waitForElementAndClick(By.id("org.wikipedia:id/search_container"), "Not found search input", 5);
-        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), query, "Not found search input", 5);
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/search_src_text"), query, "Not found query input", 5);
     }
 
     @Test
-    void searchAndClose(){
+    void testDoSearchAndClose(){
         searchSomethingOnInput("Appium");
         WebElement resultsParent = waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
         List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
@@ -127,7 +154,7 @@ public class AppTest {
 
     //Урок 3, ДЗ-3
     @Test
-    void searchAndFindResults() {
+    void testDoSearchAndFindResults() {
         searchSomethingOnInput("Java");
         WebElement resultsParent = waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
         List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.time.Duration;
 import java.util.List;
 
@@ -29,11 +28,16 @@ public class AppTest {
         capabilities.setCapability("platformVersion", "8.0");
         capabilities.setCapability("automationName", "Appium");
         capabilities.setCapability("rotatable", true);
+        capabilities.setCapability("orientation", "PORTRAIT");
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
         capabilities.setCapability("app", "C:\\Users\\Nerve\\IdeaProjects\\JavaMobileAutomationCourse\\src\\test\\resources\\apks\\org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL ("http://localhost:4723/wd/hub"), capabilities);
+
+        //Урок 4, ДЗ-3
+        ((Rotatable)driver).rotate(ScreenOrientation.PORTRAIT);
+
         WebElement skipButton = driver.findElement(By.id("org.wikipedia:id/fragment_onboarding_skip_button"));
         skipButton.click();
 
@@ -56,6 +60,7 @@ public class AppTest {
         waitForElementPresent(By.xpath("//*[@class='android.view.ViewGroup']//*[@text='Object-oriented programming language']"),
                 "Not found object with needed text",
                 10);
+        ((Rotatable)driver).rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test

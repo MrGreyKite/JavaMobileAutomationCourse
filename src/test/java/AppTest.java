@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.time.Duration;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 
 public class AppTest {
 
-    private static AppiumDriver driver;
+    private AppiumDriver driver;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -27,7 +28,7 @@ public class AppTest {
         capabilities.setCapability("deviceName", "PixelOreo8");
         capabilities.setCapability("platformVersion", "8.0");
         capabilities.setCapability("automationName", "Appium");
-        capabilities.setCapability("deviceOrientation", "LANDSCAPE");
+        capabilities.setCapability("rotatable", true);
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
         capabilities.setCapability("app", "C:\\Users\\Nerve\\IdeaProjects\\JavaMobileAutomationCourse\\src\\test\\resources\\apks\\org.wikipedia.apk");
@@ -40,14 +41,8 @@ public class AppTest {
     }
 
 
-
     @AfterEach
     public void tearDown() {
-        driver.quit();
-    }
-
-    @AfterAll
-    static void endDriver(){
         driver.quit();
     }
 
@@ -61,6 +56,7 @@ public class AppTest {
         waitForElementPresent(By.xpath("//*[@class='android.view.ViewGroup']//*[@text='Object-oriented programming language']"),
                 "Not found object with needed text",
                 10);
+        ((Rotatable)driver).rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -157,7 +153,7 @@ public class AppTest {
                 findElements(By.id("org.wikipedia:id/page_list_item_title"));
         String firstTitleBeforeRotation = waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
                 "text", "!!!", 10);
-        driver.rotate(ScreenOrientation.LANDSCAPE);
+        ((Rotatable)driver).rotate(ScreenOrientation.LANDSCAPE);
         String firstTitleAfterRotation = waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
                 "text", "Not found", 10);
         Assertions.assertEquals(firstTitleBeforeRotation, firstTitleAfterRotation, "First title changed since rotation");
@@ -287,6 +283,42 @@ public class AppTest {
         WebElement resultsParent = waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
         List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
         results.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
+    }
+
+    //Урок 4, ДЗ-1
+    @Test
+    void testOnSaveTwoArticlesAndDeleteOne() {
+        searchSomethingOnInput("Java");
+        String firstTitle = waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                "text", "Element not found", 10);
+        String secondTitle = waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[2]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                "text", "Element not found", 10);
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][contains(@text, '" + firstTitle + "')]"), "No element", 1);
+        waitForElementAndClick(By.id("org.wikipedia:id/page_save"), "Not found Save button", 5);
+        waitForElementAndClick(By.id("org.wikipedia:id/snackbar_action"), "Not present Add to list text", 5);
+        String nameOfTheList = "List for new articles";
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/text_input"),
+                nameOfTheList, "Not present text input", 5);
+        waitForElementAndClick(By.id("android:id/button1"), "Not found OK button", 1);
+        waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"),
+                "!", 5);
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][contains(@text, '" + secondTitle + "')]"),
+                "No element", 5);
+        waitForElementAndClick(By.id("org.wikipedia:id/page_save"), "Not found Save button", 5);
+        waitForElementAndClick(By.id("org.wikipedia:id/snackbar_action"), "Not present Add to list text", 5);
+        waitForElementAndClick(By.xpath("//*[contains(@text, '" + nameOfTheList + "')]"),
+                "Not found the list with name " + nameOfTheList, 5);
+        waitForElementAndClick(By.xpath("//*[@text=\"VIEW LIST\"]"),
+                "not present snackBar", 5);
+        swipeToTheLeft(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + firstTitle + "']/.."),
+                "Not found element to swipe by text " + firstTitle);
+        assertElementNotPresent(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + firstTitle + "']"));
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + secondTitle + "']"),
+                "Not found article in list with title " + secondTitle, 5);
+        assertElementHasText(By.xpath("//*[@resource-id='pcs-edit-section-title-description']/preceding-sibling::android.widget.TextView"),
+                secondTitle, "Not have title");
+
+
     }
 
 }

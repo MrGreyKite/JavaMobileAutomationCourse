@@ -56,7 +56,6 @@ public class AppTest {
         waitForElementPresent(By.xpath("//*[@class='android.view.ViewGroup']//*[@text='Object-oriented programming language']"),
                 "Not found object with needed text",
                 10);
-        ((Rotatable)driver).rotate(ScreenOrientation.LANDSCAPE);
     }
 
     @Test
@@ -317,8 +316,22 @@ public class AppTest {
                 "Not found article in list with title " + secondTitle, 5);
         assertElementHasText(By.xpath("//*[@resource-id='pcs-edit-section-title-description']/preceding-sibling::android.widget.TextView"),
                 secondTitle, "Not have title");
+    }
 
+    //Урок 4, ДЗ-2
+    public void  assertElementPresent(By locator, String errorMessage) {
+        if (getAmountOfElements(locator) == 0) {
+            throw new AssertionError("Element with locator '" + locator.toString() + "' should be on the screen");
+        }
+    }
 
+    @Test
+    void testArticleHasTitle() {
+        searchSomethingOnInput("Appium");
+        waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                "Cannot click on first article", 5);
+        assertElementPresent(By.xpath("//*[@resource-id='pcs']//android.widget.TextView[1]"),
+                "Page doesn't have a title element");
     }
 
 }

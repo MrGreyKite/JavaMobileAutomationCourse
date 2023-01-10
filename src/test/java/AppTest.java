@@ -183,11 +183,11 @@ public class AppTest extends CoreTest {
         ArticlePage firstArticle = searchPage.clickOnSearchResultByTitle(firstPageTitle);
 
         String nameOfTheList = "List for new articles";
-        firstArticle.saveArticleToCustomList(nameOfTheList);
+        firstArticle.saveArticleToCustomListFirstTime(nameOfTheList);
         firstArticle.goBackByArrowButton();
 
         ArticlePage secondArticle = searchPage.clickOnSearchResultByTitle(secondPageTitle);
-        secondArticle.saveArticleToCustomList(nameOfTheList);
+        secondArticle.saveArticleToExistingCustomList(nameOfTheList);
         secondArticle.goBackByArrowButton();
 
         searchPage.goBackOnMainPageFromSearch();

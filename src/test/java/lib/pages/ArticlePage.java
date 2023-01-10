@@ -32,6 +32,7 @@ public class ArticlePage extends CorePage {
     }
 
     public void checkThatArticleHasATitleElement(){
+        this.waitForTitleElement();
         this.assertElementPresent(By.xpath(ARTICLE_TITLE));
     }
 
@@ -49,12 +50,22 @@ public class ArticlePage extends CorePage {
                 "Not found back arrow in article", 5);
     }
 
-    public void saveArticleToCustomList(String nameOfList) {
+    public void saveArticle(){
         this.waitForElementAndClick(By.id(SAVE_BUTTON), "Not found Save button", 5);
         this.waitForElementAndClick(By.id(SNACKBAR_ACTION), "Not present Add to list text", 5);
+    }
+
+    public void saveArticleToCustomListFirstTime(String nameOfList) {
+        this.saveArticle();
         this.waitForElementAndSendKeys(By.id(MY_LIST_NAME_INPUT),
                 nameOfList, "Not present text input", 5);
         this.waitForElementAndClick(By.id(MY_LIST_OK_BUTTON), "Not found OK button", 1);
+    }
+
+    public void saveArticleToExistingCustomList(String nameOfList) {
+        this.saveArticle();
+        this.waitForElementAndClick(By.xpath("//*[contains(@text, '" + nameOfList + "')]"),
+                "Not found the list with name " + nameOfList, 5);
     }
 
 }

@@ -2,6 +2,9 @@ package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class SearchPage extends CorePage {
     public SearchPage(AppiumDriver driver) {
@@ -17,6 +20,7 @@ public class SearchPage extends CorePage {
     private static final String SEARCH_CLOSE_BUTTON = "org.wikipedia:id/search_close_btn";
     private static final String ARROW_BACK_BUTTON = "//*[@resource-id='org.wikipedia:id/search_toolbar']/android.widget.ImageButton";
     private static final String EMPTY_SEARCH_RESULTS_LABEL = "//*[@text='No results']";
+
 
     public void initSearch() {
         this.waitForElementPresent(By.id(SEARCH_INIT_ELEMENT), "Not found init search input", 5);
@@ -102,9 +106,18 @@ public class SearchPage extends CorePage {
 
     public String getTitleOfSomeArticleInResults(int numberOfArticle) {
         return this.waitForElementAndGetAttribute
-                (By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup["
+                (By.xpath("//*[@resource-id='" + RESULTS_LIST + "']/android.view.ViewGroup["
                                 + numberOfArticle
-                                + "]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                                + "]/*[@resource-id='" + ANY_RESULT_TITLE + "']"),
                 "text", "Cannot find an article in results", 15);
+    }
+
+    public void clearQueryInput() {
+        this.waitForElementAndClear(By.id(QUERY_INPUT_ELEMENT), "Not found a query input", 5);
+    }
+
+    public List<WebElement> getAllSearchResults() {
+        WebElement resultsParent = this.waitForElementPresent(By.id(RESULTS_LIST), "Not present result list");
+        return resultsParent.findElements(By.id(ANY_RESULT_TITLE));
     }
 }

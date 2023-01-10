@@ -52,7 +52,7 @@ public class CorePage {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
-    private WebElement waitForElementAndClear(By by, String errorMessage, long timeout) {
+    public WebElement waitForElementAndClear(By by, String errorMessage, long timeout) {
         WebElement e = waitForElementPresent(by, errorMessage, timeout);
         e.clear();
         return e;

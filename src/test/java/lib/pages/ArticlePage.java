@@ -13,7 +13,10 @@ public class ArticlePage extends CorePage {
     private static final String ARTICLE_TITLE = ARTICLE_DESCRIPTION + "/preceding-sibling::*[@class='android.widget.TextView']";
     private static final String ARTICLE_FOOTER = "//android.view.View[@content-desc=\"View article in browser\"]/android.widget.TextView";
     private static final String SAVE_BUTTON = "org.wikipedia:id/page_save";
+    private static final String SNACKBAR_ACTION = "org.wikipedia:id/snackbar_action";
     private static final String ARROW_BACK_BUTTON = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
+    private static final String MY_LIST_NAME_INPUT = "org.wikipedia:id/text_input";
+    private static final String MY_LIST_OK_BUTTON = "android:id/button1";
 
 
     public WebElement waitForTitleElement() {
@@ -47,7 +50,11 @@ public class ArticlePage extends CorePage {
     }
 
     public void saveArticleToCustomList(String nameOfList) {
-
+        this.waitForElementAndClick(By.id(SAVE_BUTTON), "Not found Save button", 5);
+        this.waitForElementAndClick(By.id(SNACKBAR_ACTION), "Not present Add to list text", 5);
+        this.waitForElementAndSendKeys(By.id(MY_LIST_NAME_INPUT),
+                nameOfList, "Not present text input", 5);
+        this.waitForElementAndClick(By.id(MY_LIST_OK_BUTTON), "Not found OK button", 1);
     }
 
 }

@@ -4,16 +4,11 @@ import lib.pages.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 
 public class AppTest extends CoreTest {
-
-    private CorePage corePage = new CorePage(driver);
 
     @Test
     void testFirstSearch() {
@@ -157,17 +152,16 @@ public class AppTest extends CoreTest {
     }
 
 
+    //Рефакторинг предыдущих тестов - ДЗ
+
     //Урок 3, ДЗ-2
     @Test
-    void testDoSearchAndClose(){
+    void testDoSearchAndClearInput(){
         SearchPage searchPage = new SearchPage(driver);
         searchPage.searchSomethingOnInput("Appium");
-        WebElement resultsParent = corePage.waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
-        List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
-        Assertions.assertFalse(results.isEmpty());
-        corePage.waitForElementAndClick(By.xpath("//android.widget.ImageView[@content-desc='Clear query']"), "Not found close button", 5);
-
-        Assertions.assertTrue(new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.invisibilityOf(resultsParent)));
+        Assertions.assertNotEquals(0, searchPage.getAmountOfFoundArticles());
+        searchPage.clearQueryInput();
+        searchPage.assertThatAreNotFoundAnyArticles();
     }
 
     //Урок 3, ДЗ-3
@@ -175,10 +169,8 @@ public class AppTest extends CoreTest {
     void testDoSearchAndFindResults() {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.searchSomethingOnInput("Java");
-
-        WebElement resultsParent = corePage.waitForElementPresent(By.id("org.wikipedia:id/search_results_list"), "Not present");
-        List<WebElement> results = resultsParent.findElements(By.id("org.wikipedia:id/page_list_item_title"));
-        results.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
+        List<WebElement> searchResults = searchPage.getAllSearchResults();
+        searchResults.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
     }
 
     //Урок 4, ДЗ-1
@@ -186,45 +178,36 @@ public class AppTest extends CoreTest {
     void testOnSaveTwoArticlesAndDeleteOne() {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.searchSomethingOnInput("Java");
-        String firstTitle = corePage.waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
-                "text", "Element not found", 10);
-        String secondTitle = corePage.waitForElementAndGetAttribute(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[2]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
-                "text", "Element not found", 10);
-        corePage.waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][contains(@text, '" + firstTitle + "')]"), "No element", 1);
-        corePage.waitForElementAndClick(By.id("org.wikipedia:id/page_save"), "Not found Save button", 5);
-        corePage.waitForElementAndClick(By.id("org.wikipedia:id/snackbar_action"), "Not present Add to list text", 5);
+        String firstPageTitle = searchPage.getTitleOfSomeArticleInResults(1);
+        String secondPageTitle = searchPage.getTitleOfSomeArticleInResults(2);
+        ArticlePage firstArticle = searchPage.clickOnSearchResultByTitle(firstPageTitle);
+
         String nameOfTheList = "List for new articles";
-        corePage.waitForElementAndSendKeys(By.id("org.wikipedia:id/text_input"),
-                nameOfTheList, "Not present text input", 5);
-        corePage.waitForElementAndClick(By.id("android:id/button1"), "Not found OK button", 1);
-        corePage.waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"),
-                "!", 5);
-        corePage.waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][contains(@text, '" + secondTitle + "')]"),
-                "No element", 5);
-        corePage.waitForElementAndClick(By.id("org.wikipedia:id/page_save"), "Not found Save button", 5);
-        corePage.waitForElementAndClick(By.id("org.wikipedia:id/snackbar_action"), "Not present Add to list text", 5);
-        corePage.waitForElementAndClick(By.xpath("//*[contains(@text, '" + nameOfTheList + "')]"),
-                "Not found the list with name " + nameOfTheList, 5);
-        corePage.waitForElementAndClick(By.xpath("//*[@text=\"VIEW LIST\"]"),
-                "not present snackBar", 5);
-        corePage.swipeToTheLeft(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + firstTitle + "']/.."),
-                "Not found element to swipe by text " + firstTitle, 5);
-        corePage.assertElementNotPresent(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + firstTitle + "']"));
-        corePage.waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + secondTitle + "']"),
-                "Not found article in list with title " + secondTitle, 5);
-        corePage.assertElementHasText(By.xpath("//*[@resource-id='pcs-edit-section-title-description']/preceding-sibling::android.widget.TextView"),
-                secondTitle, "Not have title");
+        firstArticle.saveArticleToCustomList(nameOfTheList);
+        firstArticle.goBackByArrowButton();
+
+        ArticlePage secondArticle = searchPage.clickOnSearchResultByTitle(secondPageTitle);
+        secondArticle.saveArticleToCustomList(nameOfTheList);
+        secondArticle.goBackByArrowButton();
+
+        searchPage.goBackOnMainPageFromSearch();
+        NavigationPanel navPanel = new NavigationPanel(driver);
+        MySavedListsPage savedLists = navPanel.selectSavedListsTab();
+        savedLists.openListByName(nameOfTheList);
+        savedLists.swipeArticleToDeleteFromList(firstPageTitle);
+        savedLists.assertThatArticleIsDeletedFromList(firstPageTitle);
+        ArticlePage secondArticleFromList = savedLists.openArticleFromList(secondPageTitle);
+        secondArticleFromList.assertThatArticleHasARightTitle(secondArticleFromList.waitForTitleElement(), secondPageTitle);
     }
 
 
     //Урок 4, ДЗ-2
     @Test
-    void testArticleHasTitle() {
+    void testRandomArticleHasTitle() {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.searchSomethingOnInput("Appium");
-        corePage.waitForElementAndClick(By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup[1]/*[@resource-id='org.wikipedia:id/page_list_item_title']"),
-                "Cannot click on first article", 5);
-        corePage.assertElementPresent(By.xpath("//*[@resource-id='pcs']//android.widget.TextView[1]"));
+        ArticlePage articlePage = searchPage.clickOnSearchResultByNumber(2);
+        articlePage.checkThatArticleHasATitleElement();
     }
 
 }

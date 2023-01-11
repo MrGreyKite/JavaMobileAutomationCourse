@@ -20,6 +20,8 @@ public class SearchPage extends CorePage {
     private static final String SEARCH_CLOSE_BUTTON = "org.wikipedia:id/search_close_btn";
     private static final String ARROW_BACK_BUTTON = "//*[@resource-id='org.wikipedia:id/search_toolbar']/android.widget.ImageButton";
     private static final String EMPTY_SEARCH_RESULTS_LABEL = "//*[@text='No results']";
+    private static final String SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION =
+            "//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING1}']/following-sibling::*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING2}']";
 
 
     public void initSearch() {
@@ -51,6 +53,16 @@ public class SearchPage extends CorePage {
 
     private static String getResultsSearchElement(String forReplacement, String substring) {
         return forReplacement.replace("{SUBSTRING}", substring);
+    }
+
+    private static String getResultsSearchElement(String forReplacement, String substring1, String substring2) {
+        return forReplacement.replace("{SUBSTRING1}", substring1).replace("{SUBSTRING2}", substring2);
+    }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        String xpath = getResultsSearchElement(SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION, title, description);
+        this.waitForElementPresent(By.xpath(xpath),
+                "Cannot find result by description " + description + " and title " + title, 15);
     }
 
     public void waitForSearchResultByDescription(String description) {

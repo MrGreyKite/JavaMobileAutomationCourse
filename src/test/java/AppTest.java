@@ -5,7 +5,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AppTest extends CoreTest {
@@ -208,6 +210,23 @@ public class AppTest extends CoreTest {
         searchPage.searchSomethingOnInput("Appium");
         ArticlePage articlePage = searchPage.clickOnSearchResultByNumber(2);
         articlePage.checkThatArticleHasATitleElement();
+    }
+
+    //Урок 5, ДЗ-2
+    @Test
+    void testOnFirstThreeResultsOfSearch() {
+        SearchPage searchPage = new SearchPage(driver);
+        searchPage.searchSomethingOnInput("Java");
+
+        Map<String, String> articlesOnDisplay = new HashMap<>();
+        articlesOnDisplay.put("Java", "Island in Indonesia");
+        articlesOnDisplay.put("JavaScript", "High-level programming language");
+        articlesOnDisplay.put("Java (programming language)", "Object-oriented programming language");
+
+        for (Map.Entry<String, String> article : articlesOnDisplay.entrySet()) {
+            searchPage.waitForElementByTitleAndDescription(article.getKey(), article.getValue());
+        }
+
     }
 
 }

@@ -52,7 +52,9 @@ public class CoreTest {
     }
 
     protected void getAppToBackground(int secs) {
+
         driver.runAppInBackground(Duration.ofSeconds(secs));
     }
+
 
 }

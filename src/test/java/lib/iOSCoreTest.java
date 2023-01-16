@@ -19,11 +19,11 @@ public class iOSCoreTest {
         capabilities.setCapability("deviceName", "iPhone 8");
         capabilities.setCapability("platformVersion", "13.5");
 //        capabilities.setCapability("automationName", "Appium");
-        capabilities.setCapability("app", "src/test/resources/apks/Wikipedia.app");
-        capabilities.setCapability("udid", "");
-        capabilities.setCapability("wdaStartupRetries", "6");
-        capabilities.setCapability("iosInstallPause","6000" );
-        capabilities.setCapability("wdaStartupRetryInterval", "20000");
+        capabilities.setCapability("app", "/Users/a123/IdeaProjects/JavaMobileAutomationCourse/src/test/resources/apks/Wikipedia.app");
+        capabilities.setCapability("udid", "DD592AB3-D894-4921-9BF4-79E6BCCCDB74");
+        capabilities.setCapability("wdaStartupRetries", "5");
+        capabilities.setCapability("iosInstallPause","9000" );
+        capabilities.setCapability("wdaStartupRetryInterval", "30000");
 
         driver = new IOSDriver(new URL(appiumUrl), capabilities);
     }

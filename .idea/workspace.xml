@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 5, ДЗ-1 - исправление">
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 5, ДЗ-2">
+      <change afterPath="$PROJECT_DIR$/src/test/java/ArticleTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ChangeAppConditionsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ListsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SearchTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/iosTests/WelcomeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/lib/iOSCoreTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,22 +51,12 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.AppTest.testOnFirstThreeResultsOfSearch">
+  <component name="RunManager" selected="JUnit.ArticleTests">
     <configuration name="AppTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AppTest" />
       <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppTest.testDoSearchAndClearInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AppTest" />
-      <option name="METHOD_NAME" value="testDoSearchAndClearInput" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -95,13 +92,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ArticleTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ArticleTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ArticleTests" />
         <item itemvalue="JUnit.AppTest.testOnFirstThreeResultsOfSearch" />
         <item itemvalue="JUnit.AppTest.test1" />
         <item itemvalue="JUnit.AppTest.testRandomArticleHasTitle" />
         <item itemvalue="JUnit.AppTest.testOnSaveTwoArticlesAndDeleteOne" />
-        <item itemvalue="JUnit.AppTest.testDoSearchAndClearInput" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673386992398</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Урок 5, ДЗ-2">
+      <created>1673396477045</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1673396477045</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -270,10 +283,10 @@
     <MESSAGE value="Урок 4, ДЗ-2" />
     <MESSAGE value="Урок 4, ДЗ-3" />
     <MESSAGE value="5" />
-    <MESSAGE value="Урок 5, ДЗ-2" />
     <MESSAGE value="Урок 5, ДЗ-1" />
     <MESSAGE value="Урок 5, ДЗ-1 - исправление" />
-    <option name="LAST_COMMIT_MESSAGE" value="Урок 5, ДЗ-1 - исправление" />
+    <MESSAGE value="Урок 5, ДЗ-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Урок 5, ДЗ-2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -27,7 +27,7 @@ public class CoreTest {
         capabilities.setCapability("orientation", "PORTRAIT");
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", ".main.MainActivity");
-        capabilities.setCapability("app", "C:\\Users\\Nerve\\IdeaProjects\\JavaMobileAutomationCourse\\src\\test\\resources\\apks\\org.wikipedia.apk");
+        capabilities.setCapability("app", "");
 
         driver = new AndroidDriver(new URL(appiumUrl), capabilities);
 

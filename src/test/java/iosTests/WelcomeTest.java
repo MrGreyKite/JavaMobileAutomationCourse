@@ -1,10 +1,12 @@
 package iosTests;
 
+import lib.CoreTest;
 import lib.iOSCoreTest;
 import lib.pages.WelcomeScreenPage;
 import org.junit.jupiter.api.Test;
 
-public class WelcomeTest extends iOSCoreTest {
+public class WelcomeTest extends CoreTest {
+
     @Test
     void testPassThroughWelcomeScreens() {
         WelcomeScreenPage welcomeScreen = new WelcomeScreenPage(driver);
@@ -26,4 +28,5 @@ public class WelcomeTest extends iOSCoreTest {
         welcomeScreen.clickOnSkipButton();
         welcomeScreen.assertThatSearchInputIsVisible();
     }
+
 }

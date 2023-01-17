@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 6 - доработка теста">
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="Урок 5, ДЗ-2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/iosTests/WelcomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/iosTests/WelcomeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/iOSCoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/iOSCoreTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,81 +49,50 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.WelcomeTest">
-    <configuration name="AppTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ListsTests">
+    <configuration name="ArticleTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AppTest" />
-      <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppTest.testOnFirstThreeResultsOfSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AppTest" />
-      <option name="METHOD_NAME" value="testOnFirstThreeResultsOfSearch" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WelcomeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="iosTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="iosTests" />
-      <option name="MAIN_CLASS_NAME" value="iosTests.WelcomeTest" />
+      <option name="MAIN_CLASS_NAME" value="ArticleTests" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="PLATFORM" value="android" />
+      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WelcomeTest.testPassThroughWelcomeScreens" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ListsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="iosTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="iosTests" />
-      <option name="MAIN_CLASS_NAME" value="iosTests.WelcomeTest" />
-      <option name="METHOD_NAME" value="testPassThroughWelcomeScreens" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ListsTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="PLATFORM" value="android" />
+      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WelcomeTest.testSkipWelcome" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="iosTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="iosTests" />
-      <option name="MAIN_CLASS_NAME" value="iosTests.WelcomeTest" />
-      <option name="METHOD_NAME" value="testSkipWelcome" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <envs>
+        <env name="PLATFORM" value="android" />
+      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.WelcomeTest" />
-        <item itemvalue="JUnit.WelcomeTest.testPassThroughWelcomeScreens" />
-        <item itemvalue="JUnit.WelcomeTest.testSkipWelcome" />
-        <item itemvalue="JUnit.AppTest.testOnFirstThreeResultsOfSearch" />
-        <item itemvalue="JUnit.AppTest.test1" />
+        <item itemvalue="JUnit.ListsTests" />
+        <item itemvalue="JUnit.ArticleTests" />
       </list>
     </recent_temporary>
   </component>
@@ -258,12 +231,12 @@
       <option name="project" value="LOCAL" />
       <updated>1673386992398</updated>
     </task>
-    <task id="LOCAL-00019" summary="Урок 6 - доработка теста">
-      <created>1673909604786</created>
+    <task id="LOCAL-00019" summary="Урок 5, ДЗ-2">
+      <created>1673396477045</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1673909604786</updated>
+      <updated>1673396477045</updated>
     </task>
     <option name="localTasksCounter" value="20" />
     <servers />
@@ -295,11 +268,10 @@
     <MESSAGE value="Урок 4, ДЗ-2" />
     <MESSAGE value="Урок 4, ДЗ-3" />
     <MESSAGE value="5" />
-    <MESSAGE value="Урок 5, ДЗ-2" />
     <MESSAGE value="Урок 5, ДЗ-1" />
     <MESSAGE value="Урок 5, ДЗ-1 - исправление" />
-    <MESSAGE value="Урок 6 - доработка теста" />
-    <option name="LAST_COMMIT_MESSAGE" value="Урок 6 - доработка теста" />
+    <MESSAGE value="Урок 5, ДЗ-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Урок 5, ДЗ-2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -5,16 +5,13 @@ import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.SupportsRotation;
-import lib.pages.WelcomeScreenPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
@@ -71,7 +68,7 @@ public class CoreTest {
             capabilities.setCapability("orientation", "PORTRAIT");
             capabilities.setCapability("appPackage", "org.wikipedia");
             capabilities.setCapability("appActivity", ".main.MainActivity");
-            capabilities.setCapability("app", "src/test/resources/apks/org.wikipedia.apk");
+            capabilities.setCapability("app", "C:\\Users\\Nerve\\IdeaProjects\\JavaMobileAutomationCourse\\src\\test\\resources\\apks\\org.wikipedia.apk");
         } else if (platform.equals("ios")) {
             capabilities.setCapability("platformName", "iOS");
             capabilities.setCapability("deviceName", "iPhone 8");

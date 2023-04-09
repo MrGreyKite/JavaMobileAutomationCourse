@@ -1,29 +1,31 @@
 package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
+import lib.pages.factories.ArticlePageFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class SearchPage extends CorePage {
+abstract public class SearchPage extends CorePage {
     public SearchPage(AppiumDriver driver) {
         super(driver);
     }
 
-    private static final String SEARCH_INIT_ELEMENT = "id:org.wikipedia:id/search_container";
-    private static final String QUERY_INPUT_ELEMENT = "id:org.wikipedia:id/search_src_text";
-    private static final String RESULTS_LIST = "id:org.wikipedia:id/search_results_list";
-    private static final String SOME_RESULT_BY_DESCRIPTION = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING}']";
-    private static final String SOME_RESULT_BY_TITLE = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING}']";
-    private static final String ANY_RESULT_TITLE = "id:org.wikipedia:id/page_list_item_title";
-    private static final String SEARCH_CLOSE_BUTTON = "id:org.wikipedia:id/search_close_btn";
-    private static final String ARROW_BACK_BUTTON = "xpath://*[@resource-id='org.wikipedia:id/search_toolbar']/android.widget.ImageButton";
-    private static final String EMPTY_SEARCH_RESULTS_LABEL = "//*[@text='No results']";
-    private static final String SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION =
-            "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING1}']/following-sibling::*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING2}']";
-
+    protected static String
+            SEARCH_INIT_ELEMENT,
+            QUERY_INPUT_ELEMENT,
+            RESULTS_LIST,
+            SOME_RESULT_BY_DESCRIPTION,
+            SOME_RESULT_BY_TITLE,
+            ANY_RESULT,
+            SEARCH_CLOSE_BUTTON,
+            SEARCH_CLEAR_BUTTON,
+            ARROW_BACK_BUTTON,
+            EMPTY_SEARCH_RESULTS_LABEL,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION;
 
     public void initSearch() {
         this.waitForElementPresent(SEARCH_INIT_ELEMENT, "Not found init search input", 5);
@@ -36,20 +38,32 @@ public class SearchPage extends CorePage {
     }
 
     public void assertThatQueryInputHasARightPlaceholder() {
-        assertElementHasText(QUERY_INPUT_ELEMENT,
-                "Search Wikipedia",
-                "Query input doesn't have expected placeholder text");
+        //для iOS - нужно искать значение атрибута методом assertElementHasAttribute - атрибут label или value
+        if(Platform.getInstance().isAndroid()) {
+            assertElementHasText(QUERY_INPUT_ELEMENT,
+                    "Search Wikipedia",
+                    "Query input doesn't have expected placeholder text");
+        } else {
+            this.assertElementHasAttribute(QUERY_INPUT_ELEMENT, "value", "Search Wikipedia",
+                    "Query input doesn't have expected placeholder text");
+        }
     }
 
     //Урок 3, ДЗ-2
     public void searchSomethingOnInput(String query) {
         this.waitForElementAndClick(SEARCH_INIT_ELEMENT, "Not found search input", 5);
-        this.waitForElementAndSendKeys(QUERY_INPUT_ELEMENT, query, "Not found query input", 5);
+        this.waitForElementAndSendKeys(QUERY_INPUT_ELEMENT, query, "Not found query input", 10);
     }
 
     public void clickOnCloseSearchButton() {
-        this.waitForElementAndClick(SEARCH_CLOSE_BUTTON, "Not found close button", 5);
-        this.waitForElementNotPresent(SEARCH_CLOSE_BUTTON, "Close button is still active", 10);
+        //для iOS - иная логика закрытия поиска: поиск отменяется нажатием на Cancel, а очищается по крестику
+        if(Platform.getInstance().isAndroid()) {
+            this.waitForElementAndClick(SEARCH_CLOSE_BUTTON, "Not found close button", 5);
+            this.waitForElementNotPresent(SEARCH_CLOSE_BUTTON, "Close button is still active", 10);
+        } else {
+            this.waitForElementAndClick(SEARCH_CLEAR_BUTTON, "Not found clear button", 5);
+            this.waitForElementNotPresent(SEARCH_CLEAR_BUTTON, "Clear button is still active", 10);
+        }
     }
 
     private static String getResultsSearchElement(String forReplacement, String substring) {
@@ -81,31 +95,46 @@ public class SearchPage extends CorePage {
     public ArticlePage clickOnSearchResultByTitle(String articleTitle) {
         String xpath = getResultsSearchElement(SOME_RESULT_BY_TITLE, articleTitle);
         this.waitForElementAndClick(xpath,"Cannot click on needed article by title " + articleTitle, 10);
-        return new ArticlePage(driver);
+        return ArticlePageFactory.get(driver);
     }
 
     public ArticlePage clickOnSearchResultByNumber(int numberOfArticleInResults) {
-        this.waitForElementAndClick
-                ("xpath://*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup["
-                                + numberOfArticleInResults
-                                + "]/*[@resource-id='org.wikipedia:id/page_list_item_title']",
-                        "Cannot find an article in results", 15);
-        return new ArticlePage(driver);
+        //для поиска по номеру в iOS воспользоваться иной логикой - List<WebElement> и соответственно по номеру в листе искать - минус единица
+        if(Platform.getInstance().isAndroid()){
+            this.waitForElementAndClick
+                    ("xpath://*[@resource-id='org.wikipedia:id/search_results_list']/android.view.ViewGroup["
+                                    + numberOfArticleInResults
+                                    + "]/*[@resource-id='org.wikipedia:id/page_list_item_title']",
+                            "Cannot find an article in results", 15);
+        } else {
+            List<WebElement> results = this.getAllSearchResults();
+            results.get(numberOfArticleInResults-1).click();
+        }
+        return ArticlePageFactory.get(driver);
+
     }
 
     public void goBackOnMainPageFromSearch() {
-        this.waitForElementAndClick(ARROW_BACK_BUTTON,
-                "Not found back arrow in search results", 5);
+        //для iOS это кнопка Close
+        if(Platform.getInstance().isAndroid()) {
+            this.waitForElementAndClick(ARROW_BACK_BUTTON,
+                    "Not found back arrow in search results", 5);
+        } else {
+            this.waitForElementAndClick(SEARCH_CLOSE_BUTTON, "Not found iOS close button", 10);
+        }
+
     }
 
     public int getAmountOfFoundArticles() {
+        //для поиска по номеру в iOS воспользоваться иной логикой - List<WebElement>, уже есть getAllSearchResults()
         this.waitForElementPresent(RESULTS_LIST, "No results in search");
-        return this.getAmountOfElements(ANY_RESULT_TITLE);
+        //return this.getAmountOfElements(ANY_RESULT_TITLE);
+        return this.getAllSearchResults().size();
     }
 
     public void assertThatSomeArticlesAreFoundOnSearch() {
         this.waitForElementPresent(RESULTS_LIST, "No results in search");
-        this.assertElementPresent(ANY_RESULT_TITLE);
+        this.assertElementPresent(ANY_RESULT);
     }
 
     public void waitForEmptySearchResultByQuery(String searchString) {
@@ -114,15 +143,22 @@ public class SearchPage extends CorePage {
     }
 
     public void assertThatAreNotFoundAnyArticles() {
-        this.assertElementNotPresent(ANY_RESULT_TITLE);
+        this.assertElementNotPresent(ANY_RESULT);
     }
 
     public String getTitleOfSomeArticleInResults(int numberOfArticle) {
-        return this.waitForElementAndGetAttribute
-                ("xpath://*[@resource-id='" + RESULTS_LIST.split(Pattern.quote(":"), 2)[1] + "']/android.view.ViewGroup["
-                                + numberOfArticle
-                                + "]/*[@resource-id='" + ANY_RESULT_TITLE.split(Pattern.quote(":"), 2)[1] + "']",
-                "text", "Cannot find an article in results", 15);
+        //для iOS нужно по-другому - через список всех результатов
+        if(Platform.getInstance().isAndroid()) {
+            return this.waitForElementAndGetAttribute
+                    ("xpath://*[@resource-id='" + RESULTS_LIST.split(Pattern.quote(":"), 2)[1] + "']/android.view.ViewGroup["
+                                    + numberOfArticle
+                                    + "]/*[@resource-id='" + ANY_RESULT.split(Pattern.quote(":"), 2)[1] + "']",
+                            "text", "Cannot find an article in results", 15);
+        } else {
+            List<WebElement> results = this.getAllSearchResults();
+            return results.get(numberOfArticle-1).getAttribute("name");
+        }
+
     }
 
     public void clearQueryInput() {
@@ -130,8 +166,9 @@ public class SearchPage extends CorePage {
     }
 
     public List<WebElement> getAllSearchResults() {
-        WebElement resultsParent = this.waitForElementPresent(RESULTS_LIST, "Not present result list");
-        By by = this.getLocatorByString(ANY_RESULT_TITLE);
-        return resultsParent.findElements(by);
+        this.waitForElementPresent(RESULTS_LIST, "Not present result list");
+        WebElement resultsList = driver.findElement(this.getLocatorByString(RESULTS_LIST));
+        By by = this.getLocatorByString(ANY_RESULT);
+        return resultsList.findElements(by);
     }
 }

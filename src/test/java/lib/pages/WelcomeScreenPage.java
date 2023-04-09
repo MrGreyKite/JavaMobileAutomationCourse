@@ -48,7 +48,7 @@ public class WelcomeScreenPage extends CorePage {
 
     public void clickOnSkipButton() {
         this.waitForElementAndClick(SKIP_BUTTON,
-                "Cannot find button 'Next'", 30);
+                "Cannot find button 'Skip'", 30);
     }
 
     public void assertThatSearchInputIsVisible() {

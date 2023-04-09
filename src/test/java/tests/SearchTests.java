@@ -1,5 +1,8 @@
+package tests;
+
 import lib.CoreTest;
 import lib.pages.SearchPage;
+import lib.pages.factories.SearchPageFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,7 @@ public class SearchTests extends CoreTest {
 
     @Test
     void testFirstSearch() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.initSearch();
         searchPage.typeSearchQuery("Java");
         searchPage.waitForSearchResultByDescription("Object-oriented programming language");
@@ -21,28 +24,28 @@ public class SearchTests extends CoreTest {
 
     @Test
     void testQueryInputHasRightText() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.initSearch();
         searchPage.assertThatQueryInputHasARightPlaceholder();
     }
 
     @Test
     void testAbortSearchAttempt() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("App");
         searchPage.clickOnCloseSearchButton();
     }
 
     @Test
     void testProductiveSearch() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Linkin Park");
         searchPage.assertThatSomeArticlesAreFoundOnSearch();
     }
 
     @Test
     void testEmptySearch() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         String randomSearchString = RandomStringUtils.randomAlphabetic(10);
         searchPage.searchSomethingOnInput(randomSearchString);
         searchPage.waitForEmptySearchResultByQuery(randomSearchString);
@@ -52,7 +55,7 @@ public class SearchTests extends CoreTest {
     //Урок 3, ДЗ-2
     @Test
     void testDoSearchAndClearInput(){
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Appium");
         Assertions.assertNotEquals(0, searchPage.getAmountOfFoundArticles());
         searchPage.clearQueryInput();
@@ -62,7 +65,7 @@ public class SearchTests extends CoreTest {
     //Урок 3, ДЗ-3
     @Test
     void testDoSearchAndFindResults() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
         List<WebElement> searchResults = searchPage.getAllSearchResults();
         searchResults.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
@@ -71,7 +74,7 @@ public class SearchTests extends CoreTest {
     //Урок 5, ДЗ-2
     @Test
     void testOnFirstThreeResultsOfSearch() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
 
         Map<String, String> articlesOnDisplay = new HashMap<>();

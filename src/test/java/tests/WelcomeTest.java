@@ -1,11 +1,17 @@
-package iosTests;
+package tests;
 
 import lib.CoreTest;
-import lib.iOSCoreTest;
+import lib.Platform;
 import lib.pages.WelcomeScreenPage;
 import org.junit.jupiter.api.Test;
 
 public class WelcomeTest extends CoreTest {
+
+    @Override
+    public void setUp() throws Exception {
+        driver = Platform.getInstance().getDriverTypeFromPlatform();
+        this.rotateScreenToPortrait();
+    }
 
     @Test
     void testPassThroughWelcomeScreens() {

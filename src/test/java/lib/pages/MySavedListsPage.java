@@ -1,14 +1,16 @@
 package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
+import lib.pages.factories.ArticlePageFactory;
 
-public class MySavedListsPage extends CorePage {
+abstract public class MySavedListsPage extends CorePage {
     public MySavedListsPage(AppiumDriver driver) {
         super(driver);
     }
 
-    private static final String LIST_BY_NAME_TEMPLATE = "xpath://*[@resource-id='org.wikipedia:id/item_title'][@text='{TITLE}']";
-    private static final String ARTICLE_IN_THE_LIST = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{TITLE}']";
+    protected static String
+    LIST_BY_NAME_TEMPLATE, ARTICLE_IN_THE_LIST, DELETE_BUTTON;
 
     private static String getListXpathFromTemplate(String forReplacement, String substring) {
         return forReplacement.replace("{TITLE}", substring);
@@ -29,17 +31,21 @@ public class MySavedListsPage extends CorePage {
         String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle);
         this.waitForElementAndClick(xpath,
                 "Not found saved article with title " + articleTitle, 5);
-        return new ArticlePage(driver);
+        return ArticlePageFactory.get(driver);
     }
 
     public void swipeArticleToDeleteFromList(String articleTitle) {
         String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle) + "/..";
         this.swipeToTheLeft(xpath,
                 "Not found element to swipe by title " + articleTitle, 5);
+        if(Platform.getInstance().isIOS()) {
+            this.waitForElementAndClick(DELETE_BUTTON, "Not found delete icon", 10);
+        }
     }
 
     public void assertThatArticleIsDeletedFromList(String articleTitle) {
-        this.waitForElementNotPresent("xpath:[@text='" + articleTitle + "']",
+        String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle);
+        this.waitForElementNotPresent(xpath,
                 "Cannot delete article with title " + articleTitle, 10);
     }
 }

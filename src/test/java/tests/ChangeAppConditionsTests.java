@@ -1,13 +1,16 @@
+package tests;
+
 import lib.CoreTest;
 import lib.pages.ArticlePage;
 import lib.pages.SearchPage;
+import lib.pages.factories.SearchPageFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ChangeAppConditionsTests extends CoreTest {
     @Test
     void testChangeScreenOrientationOnArticlePage() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
         ArticlePage articlePage = searchPage.clickOnSearchResultByNumber(1);
         String titleBeforeRotation = articlePage.getArticleTitle();
@@ -20,7 +23,7 @@ public class ChangeAppConditionsTests extends CoreTest {
 
     @Test
     void testChangeScreenOrientationOnResultsPage() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
         String firstPageTitleBeforeRotation = searchPage.getTitleOfSomeArticleInResults(1);
         this.rotateScreenToLandscape();
@@ -31,7 +34,7 @@ public class ChangeAppConditionsTests extends CoreTest {
 
     @Test
     void testReturnAppFromBackground() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
         searchPage.waitForSearchResultByTitle("JavaScript");
         this.getAppToBackground(5);

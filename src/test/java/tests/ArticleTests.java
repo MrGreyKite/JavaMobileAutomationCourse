@@ -1,19 +1,27 @@
+package tests;
+
 import lib.CoreTest;
+import lib.Platform;
 import lib.pages.ArticlePage;
 import lib.pages.SearchPage;
+import lib.pages.factories.SearchPageFactory;
 import org.junit.jupiter.api.Test;
 
 public class ArticleTests extends CoreTest {
 
     @Test
     void testCompareArticleTitle() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
 
         String title = "Java (programming language)";
 
         ArticlePage articlePage = searchPage.clickOnSearchResultByTitle(title);
-        articlePage.assertThatArticleHasARightTitle(articlePage.waitForTitleElement(), title);
+        if(Platform.getInstance().isAndroid()) {
+            articlePage.assertThatArticleHasARightTitle(articlePage.waitForTitleElement(), title);
+        } else {
+            articlePage.assertThatArticleHasARightTitle(articlePage.waitForTitleElement(title), title);
+        }
     }
 
     /* old version of partial swipe, without page-objectifying
@@ -30,17 +38,18 @@ public class ArticleTests extends CoreTest {
 
     @Test
     void testSwipeArticleToTheEnd() {
-        SearchPage searchPage = new SearchPage(driver);
-        searchPage.searchSomethingOnInput("Java");
-        ArticlePage articlePage = searchPage.clickOnSearchResultByTitle("Java (programming language)");
+        String searchQuery = "Appium";
+        SearchPage searchPage = SearchPageFactory.get(driver);
+        searchPage.searchSomethingOnInput(searchQuery);
+        ArticlePage articlePage = searchPage.clickOnSearchResultByTitle(searchQuery);
         articlePage.waitForTitleElement();
-        articlePage.swipeArticleToTheEnd(50);
+        articlePage.swipeArticleToTheEnd(30);
     }
 
     //Урок 4, ДЗ-2
     @Test
     void testRandomArticleHasTitle() {
-        SearchPage searchPage = new SearchPage(driver);
+        SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Appium");
         ArticlePage articlePage = searchPage.clickOnSearchResultByNumber(2);
         articlePage.checkThatArticleHasATitleElement();

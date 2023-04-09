@@ -3,6 +3,7 @@ package lib.pages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
+import lib.Platform;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -80,13 +81,23 @@ public class CorePage {
     public void swipeToTheLeft(String stringLocator, String errorMessage, int durationOfSwipe) {
         WebElement el = waitForElementPresent(stringLocator, errorMessage, 10);
         int leftX = el.getLocation().getX();
-        int rightX = leftX + el.getSize().width;
+        int rightX = leftX + el.getSize().getWidth();
         int upperY = el.getLocation().getY();
-        int lowerY = upperY + el.getSize().height;
+        int lowerY = upperY + el.getSize().getHeight();
         int middleY = (upperY + lowerY) / 2;
 
         TouchAction action = new TouchAction((PerformsTouchActions) driver);
-        action.press(point(leftX,middleY)).waitAction(waitOptions(Duration.ofSeconds(durationOfSwipe))).moveTo(point(rightX, middleY)).release().perform();
+        action.press(point((int) (rightX * 0.9), middleY));
+        action.waitAction(waitOptions(Duration.ofSeconds(durationOfSwipe)));
+
+        if(Platform.getInstance().isAndroid()) {
+            action.moveTo(point((int) (leftX * 0.1), middleY));
+        } else {
+            int offset_x = (-1 * el.getSize().getWidth());
+            action.moveTo(point(offset_x, 0));
+        }
+
+        action.release().perform();
     }
 
     public void swipeUntilElementIsFound(String stringLocator, int maxSwipes) {
@@ -121,6 +132,11 @@ public class CorePage {
 
     public void assertElementHasText(WebElement element, String expectedText, String errorMessage) {
         Assertions.assertEquals(expectedText, element.getText(), errorMessage);
+    }
+
+    public void assertElementHasAttribute(String stringLocator, String attributeType, String attributeValue, String errorMessage){
+        WebElement e = waitForElementPresent(stringLocator, errorMessage);
+        Assertions.assertEquals(attributeValue, e.getAttribute(attributeType), errorMessage);
     }
 
     //Урок 4, ДЗ-2

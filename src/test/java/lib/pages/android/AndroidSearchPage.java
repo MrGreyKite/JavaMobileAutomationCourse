@@ -17,7 +17,7 @@ public class AndroidSearchPage extends SearchPage {
         ANY_RESULT = "id:org.wikipedia:id/page_list_item_title";
         SEARCH_CLOSE_BUTTON = "id:org.wikipedia:id/search_close_btn";
         ARROW_BACK_BUTTON = "xpath://*[@resource-id='org.wikipedia:id/search_toolbar']/android.widget.ImageButton";
-        EMPTY_SEARCH_RESULTS_LABEL = "//*[@text='No results']";
+        EMPTY_SEARCH_RESULTS_LABEL = "xpath://*[@text='No results']";
         SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION =
                 "xpath://*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='{SUBSTRING1}']/following-sibling::*[@resource-id='org.wikipedia:id/page_list_item_description'][@text='{SUBSTRING2}']";
 

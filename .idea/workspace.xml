@@ -4,35 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="ДЗ-6 - рефакторинг локаторов">
-      <change afterPath="$PROJECT_DIR$/ci-scripts/runemulator.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/Platform.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidArticlePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidMySavedListsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidNavigationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidSearchPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/ArticlePageFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/MySavedListsPageFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/NavigationPanelFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/SearchPageFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ios/iOsArticlePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ios/iOsMySavedListsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ios/iOsNavigationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ios/iOsSearchPage.java" afterDir="false" />
+    <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="ДЗ-7 насколько успел и получилось">
+      <change afterPath="$PROJECT_DIR$/src/test/java/suits/TestSuitForAndroid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ArticleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ArticleTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ChangeAppConditionsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ChangeAppConditionsTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ListsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ListsTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SearchTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/SearchTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/iosTests/WelcomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/WelcomeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/iOSCoreTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidSearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidSearchPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -338,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673991185921</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ДЗ-7 насколько успел и получилось">
+      <created>1681009912920</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1681009912920</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,7 +355,8 @@
     <MESSAGE value="Урок 5, ДЗ-1 - исправление" />
     <MESSAGE value="Урок 5, ДЗ-2" />
     <MESSAGE value="ДЗ-6 - рефакторинг локаторов" />
-    <option name="LAST_COMMIT_MESSAGE" value="ДЗ-6 - рефакторинг локаторов" />
+    <MESSAGE value="ДЗ-7 насколько успел и получилось" />
+    <option name="LAST_COMMIT_MESSAGE" value="ДЗ-7 насколько успел и получилось" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

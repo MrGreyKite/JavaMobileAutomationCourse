@@ -2,9 +2,10 @@ package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
 import lib.pages.factories.MySavedListsPageFactory;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class NavigationPanel extends CorePage {
-    public NavigationPanel(AppiumDriver driver) {
+    public NavigationPanel(RemoteWebDriver driver) {
         super(driver);
     }
 

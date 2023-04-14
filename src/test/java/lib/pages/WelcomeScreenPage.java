@@ -1,9 +1,10 @@
 package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WelcomeScreenPage extends CorePage {
-    public WelcomeScreenPage(AppiumDriver driver) {
+    public WelcomeScreenPage(RemoteWebDriver driver) {
         super(driver);
     }
 

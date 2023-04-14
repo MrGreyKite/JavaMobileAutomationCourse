@@ -54,12 +54,12 @@ public class SearchTests extends CoreTest {
 
     //Урок 3, ДЗ-2
     @Test
-    void testDoSearchAndClearInput(){
+    void testDoSearchAndClearInput() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Appium");
         Assertions.assertNotEquals(0, searchPage.getAmountOfFoundArticles());
         searchPage.clearQueryInput();
-        searchPage.assertThatAreNotFoundAnyArticles();
+        searchPage.assertThatAreNotFoundAnyArticles(); //тест падает в mobile Web
     }
 
     //Урок 3, ДЗ-3
@@ -69,6 +69,7 @@ public class SearchTests extends CoreTest {
         searchPage.searchSomethingOnInput("Java");
         List<WebElement> searchResults = searchPage.getAllSearchResults();
         searchResults.forEach(result -> Assertions.assertTrue((result.getText()).contains("Java")));
+        //тест падает на mobileWeb, потому что один из ответов содержит "JaVa" в другом регистре
     }
 
     //Урок 5, ДЗ-2

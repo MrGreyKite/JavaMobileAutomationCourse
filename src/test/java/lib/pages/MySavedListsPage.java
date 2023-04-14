@@ -3,9 +3,10 @@ package lib.pages;
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import lib.pages.factories.ArticlePageFactory;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class MySavedListsPage extends CorePage {
-    public MySavedListsPage(AppiumDriver driver) {
+    public MySavedListsPage(RemoteWebDriver driver) {
         super(driver);
     }
 

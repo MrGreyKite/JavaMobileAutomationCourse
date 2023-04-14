@@ -3,9 +3,10 @@ package lib.pages;
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class ArticlePage extends CorePage {
-    public ArticlePage(AppiumDriver driver) {
+    public ArticlePage(RemoteWebDriver driver) {
         super(driver);
     }
 

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,9 +21,9 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 
 public class CorePage {
 
-    protected AppiumDriver driver;
+    protected RemoteWebDriver driver;
 
-    public CorePage(AppiumDriver driver) {
+    public CorePage(RemoteWebDriver driver) {
         this.driver = driver;
     }
 
@@ -68,48 +69,55 @@ public class CorePage {
     }
 
     public void swipeUp(int timeForSwipe) {
-        TouchAction action = new TouchAction((PerformsTouchActions) driver);
-        Dimension size = driver.manage().window().getSize();
-        int x = size.width / 2;
-        int startY = (int) (size.height * 0.9);
-        int endY = (int) (size.height * 0.2);
-        action.press(point(x, startY)).waitAction(waitOptions(Duration.ofSeconds(timeForSwipe))).
-                moveTo(point(x, endY)).release().perform();
+        if (driver instanceof AppiumDriver) {
+            TouchAction action = new TouchAction((PerformsTouchActions) driver);
+            Dimension size = driver.manage().window().getSize();
+            int x = size.width / 2;
+            int startY = (int) (size.height * 0.9);
+            int endY = (int) (size.height * 0.2);
+            action.press(point(x, startY)).waitAction(waitOptions(Duration.ofSeconds(timeForSwipe))).
+                    moveTo(point(x, endY)).release().perform();
+        }
+        else System.out.println("Method do nothing for the platform " + Platform.getInstance().getPlatform());
 
     }
 
     public void swipeToTheLeft(String stringLocator, String errorMessage, int durationOfSwipe) {
-        WebElement el = waitForElementPresent(stringLocator, errorMessage, 10);
-        int leftX = el.getLocation().getX();
-        int rightX = leftX + el.getSize().getWidth();
-        int upperY = el.getLocation().getY();
-        int lowerY = upperY + el.getSize().getHeight();
-        int middleY = (upperY + lowerY) / 2;
+        if (driver instanceof AppiumDriver) {
+            WebElement el = waitForElementPresent(stringLocator, errorMessage, 10);
+            int leftX = el.getLocation().getX();
+            int rightX = leftX + el.getSize().getWidth();
+            int upperY = el.getLocation().getY();
+            int lowerY = upperY + el.getSize().getHeight();
+            int middleY = (upperY + lowerY) / 2;
 
-        TouchAction action = new TouchAction((PerformsTouchActions) driver);
-        action.press(point((int) (rightX * 0.9), middleY));
-        action.waitAction(waitOptions(Duration.ofSeconds(durationOfSwipe)));
+            TouchAction action = new TouchAction((PerformsTouchActions) driver);
+            action.press(point((int) (rightX * 0.9), middleY));
+            action.waitAction(waitOptions(Duration.ofSeconds(durationOfSwipe)));
 
-        if(Platform.getInstance().isAndroid()) {
-            action.moveTo(point((int) (leftX * 0.1), middleY));
-        } else {
-            int offset_x = (-1 * el.getSize().getWidth());
-            action.moveTo(point(offset_x, 0));
-        }
+            if (Platform.getInstance().isAndroid()) {
+                action.moveTo(point((int) (leftX * 0.1), middleY));
+            } else {
+                int offset_x = (-1 * el.getSize().getWidth());
+                action.moveTo(point(offset_x, 0));
+            }
 
-        action.release().perform();
+            action.release().perform();
+        } else System.out.println("Method do nothing for the platform " + Platform.getInstance().getPlatform());
     }
 
     public void swipeUntilElementIsFound(String stringLocator, int maxSwipes) {
-        int alreadySwiped = 0;
-        while(getAmountOfElements(stringLocator) == 0) {
-            if (alreadySwiped > maxSwipes) {
-                waitForElementPresent(stringLocator, "Cannot find element " + stringLocator + " while swiping");
-                return;
+        if (driver instanceof AppiumDriver) {
+            int alreadySwiped = 0;
+            while (getAmountOfElements(stringLocator) == 0) {
+                if (alreadySwiped > maxSwipes) {
+                    waitForElementPresent(stringLocator, "Cannot find element " + stringLocator + " while swiping");
+                    return;
+                }
+                swipeUp(1);
+                ++alreadySwiped;
             }
-            swipeUp(1);
-            ++alreadySwiped;
-        }
+        } else System.out.println("Method do nothing for the platform " + Platform.getInstance().getPlatform());
     }
 
     public int getAmountOfElements(String stringLocator){
@@ -151,11 +159,16 @@ public class CorePage {
         String[] dividedLocator = locatorWithType.split(Pattern.quote(":"), 2);
         String byType = dividedLocator[0];
         String locator = dividedLocator[1];
-        if (byType.equals("xpath")) {
-            return By.xpath(locator);
-        } else if (byType.equals("id")) {
-            return By.id(locator);
-        } else throw new IllegalArgumentException("Cannot get type of locator");
+        switch (byType) {
+            case "xpath":
+                return By.xpath(locator);
+            case "id":
+                return By.id(locator);
+            case "css":
+                return By.cssSelector(locator);
+            default:
+                throw new IllegalArgumentException("Cannot get type of locator");
+        }
 
     }
 

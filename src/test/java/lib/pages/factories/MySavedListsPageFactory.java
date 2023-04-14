@@ -5,12 +5,13 @@ import lib.Platform;
 import lib.pages.MySavedListsPage;
 import lib.pages.android.AndroidMySavedListsPage;
 import lib.pages.ios.iOsMySavedListsPage;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class MySavedListsPageFactory {
 
-    public static MySavedListsPage get(AppiumDriver driver) {
+    public static MySavedListsPage get(RemoteWebDriver driver) {
         if (Platform.getInstance().isAndroid()) {
-            return new AndroidMySavedListsPage(driver);
-        } else return new iOsMySavedListsPage(driver);
+            return new AndroidMySavedListsPage((AppiumDriver) driver);
+        } else return new iOsMySavedListsPage((AppiumDriver) driver);
     }
 }

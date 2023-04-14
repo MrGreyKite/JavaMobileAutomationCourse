@@ -1,16 +1,16 @@
 package lib.pages;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import lib.pages.factories.ArticlePageFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
 abstract public class SearchPage extends CorePage {
-    public SearchPage(AppiumDriver driver) {
+    public SearchPage(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -39,7 +39,7 @@ abstract public class SearchPage extends CorePage {
 
     public void assertThatQueryInputHasARightPlaceholder() {
         //для iOS - нужно искать значение атрибута методом assertElementHasAttribute - атрибут label или value
-        if(Platform.getInstance().isAndroid()) {
+        if(Platform.getInstance().isAndroid() || Platform.getInstance().isMW()) {
             assertElementHasText(QUERY_INPUT_ELEMENT,
                     "Search Wikipedia",
                     "Query input doesn't have expected placeholder text");

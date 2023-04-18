@@ -1,9 +1,14 @@
 package lib.pages;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 
 abstract public class ArticlePage extends CorePage {
     public ArticlePage(RemoteWebDriver driver) {
@@ -16,6 +21,8 @@ abstract public class ArticlePage extends CorePage {
         ARTICLE_TITLE_TEMPLATE,
         ARTICLE_FOOTER,
         SAVE_BUTTON,
+        DELETE_FROM_SAVED_BUTTON,
+        LOG_IN_BUTTON,
         SNACKBAR_ACTION_TEMPLATE,
         SNACKBAR_ACTION,
         CONFIRM_NEW_LIST_CREATION,
@@ -38,7 +45,7 @@ abstract public class ArticlePage extends CorePage {
     }
 
     public String getArticleTitle() {
-        if(Platform.getInstance().isAndroid()){
+        if(Platform.getInstance().isAndroid() || Platform.getInstance().isMW()){
             return this.waitForElementAndGetAttribute(ARTICLE_TITLE, "text", "Cannot find an article title", 10);
         } else {
         return this.waitForElementAndGetAttribute(ARTICLE_TITLE, "name", "Cannot find an article title", 10);
@@ -59,12 +66,18 @@ abstract public class ArticlePage extends CorePage {
     }
 
     public void swipeArticleToTheEnd(int maxSwipes) {
-        this.swipeUntilElementIsFound(ARTICLE_FOOTER
+        if (Platform.getInstance().isMW()) {
+            this.scrollMobileWebPageUntilElementIsFound(ARTICLE_FOOTER, maxSwipes);
+        } else this.swipeUntilElementIsFound(ARTICLE_FOOTER
                 , maxSwipes);
     }
 
     public void saveArticleToDefaultList(){
-        this.waitForElementAndClick(SAVE_BUTTON, "Not found Save button", 5);
+        if (Platform.getInstance().isMW()) {
+            this.removeArticleFromSavedIfAdded();
+            this.waitForElementAndClick(SAVE_BUTTON, "Not found Save button", 15);
+        } else {
+        this.waitForElementAndClick(SAVE_BUTTON, "Not found Save button", 15); }
     }
 
     public void goBackByArrowButton() {
@@ -92,6 +105,21 @@ abstract public class ArticlePage extends CorePage {
         this.saveArticle(title);
         this.waitForElementAndClick("xpath://*[contains(@text, '" + nameOfList + "')]",
                 "Not found the list with name " + nameOfList, 5);
+    }
+
+    public void removeArticleFromSavedIfAdded() {
+        boolean alreadySaved = this.isElementPresent(DELETE_FROM_SAVED_BUTTON);
+        if (alreadySaved) {
+            this.waitForElementAndClick(DELETE_FROM_SAVED_BUTTON, "Cannot click on Unsave button", 15);
+            this.waitForElementPresent(SAVE_BUTTON, "Cannot detect Save button", 15);
+        }
+    }
+
+    public AuthorizationPage clickLoginButtonInView() {
+       WebElement lb = this.waitForElementPresent(LOG_IN_BUTTON, "Login button not clickable", 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(lb)).click();
+        return new AuthorizationPage(driver);
     }
 
 }

@@ -91,8 +91,8 @@ public class Platform {
     private ChromeOptions getOptionsForMWC() {
 
         Map<String, Object> deviceMetrics = new HashMap<>();
-        deviceMetrics.put("width", 393);
-        deviceMetrics.put("height", 768);
+        deviceMetrics.put("width", 360);
+        deviceMetrics.put("height", 640);
         deviceMetrics.put("pixelRatio", 3.0);
         Map<String, Object> mobileEmulation = new HashMap<>();
         mobileEmulation.put("deviceMetrics", deviceMetrics);

@@ -7,6 +7,7 @@ import lib.Platform;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -66,6 +67,30 @@ public class CorePage {
     public String waitForElementAndGetAttribute(String stringLocator, String attribute, String errorMessage, long timeout) {
         WebElement e = waitForElementPresent(stringLocator, errorMessage, timeout);
         return e.getAttribute(attribute);
+    }
+
+    public void scrollMobileWebPageUp() {
+        if (Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
+            System.out.println("Not apply to " + Platform.getInstance().getPlatform());
+        } else {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("window.scrollBy(0,250)");
+        }
+    }
+
+    public void scrollMobileWebPageUntilElementIsFound(String stringLocator, int maxSwipes) {
+        int alreadySwiped = 0;
+
+        while (getAmountOfElements(stringLocator) == 0) {
+            scrollMobileWebPageUp();
+            ++alreadySwiped;
+
+            if (alreadySwiped > maxSwipes) {
+                waitForElementPresent(stringLocator, "Cannot find element " + stringLocator + " while scrolling");
+                return;
+            }
+        }
+
     }
 
     public void swipeUp(int timeForSwipe) {
@@ -152,7 +177,10 @@ public class CorePage {
         if (getAmountOfElements(stringLocator) == 0) {
             throw new AssertionError("Element(s) with locator '" + stringLocator + "' should be on the screen");
         }
+    }
 
+    public boolean isElementPresent(String locator) {
+        return getAmountOfElements(locator) > 0;
     }
 
     By getLocatorByString(String locatorWithType) { //id:someLocator

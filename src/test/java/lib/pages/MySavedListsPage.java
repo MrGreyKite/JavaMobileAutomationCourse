@@ -31,7 +31,7 @@ abstract public class MySavedListsPage extends CorePage {
     public ArticlePage openArticleFromList(String articleTitle) {
         String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle);
         this.waitForElementAndClick(xpath,
-                "Not found saved article with title " + articleTitle, 5);
+                "Not found saved article with title " + articleTitle, 15);
         return ArticlePageFactory.get(driver);
     }
 
@@ -44,9 +44,15 @@ abstract public class MySavedListsPage extends CorePage {
         }
     }
 
+    //ДЗ-17, вспомогательный метод
+    public void clickToRemoveFromList(String articleTitle) {
+        String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle) + DELETE_BUTTON;
+        this.waitForElementAndClick(xpath, "Cannot click on element to remove article from list", 15);
+    }
+
     public void assertThatArticleIsDeletedFromList(String articleTitle) {
         String xpath = getListXpathFromTemplate(ARTICLE_IN_THE_LIST, articleTitle);
         this.waitForElementNotPresent(xpath,
-                "Cannot delete article with title " + articleTitle, 10);
+                "Article with title " + articleTitle + " was not deleted", 10);
     }
 }

@@ -17,7 +17,7 @@ public class ArticleTests extends CoreTest {
         String title = "Java (programming language)";
 
         ArticlePage articlePage = searchPage.clickOnSearchResultByTitle(title);
-        if(Platform.getInstance().isAndroid()) {
+        if(Platform.getInstance().isAndroid() || Platform.getInstance().isMW()) {
             articlePage.assertThatArticleHasARightTitle(articlePage.waitForTitleElement(), title);
         } else {
             articlePage.assertThatArticleHasARightTitle(articlePage.waitForTitleElement(title), title);
@@ -37,13 +37,15 @@ public class ArticleTests extends CoreTest {
     */
 
     @Test
-    void testSwipeArticleToTheEnd() {
-        String searchQuery = "Appium";
+    void testSwipeArticleToTheEnd() throws InterruptedException {
+        String searchQuery = "Java";
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput(searchQuery);
-        ArticlePage articlePage = searchPage.clickOnSearchResultByTitle(searchQuery);
+        ArticlePage articlePage = searchPage.clickOnSearchResultByTitle("Java (programming language)");
         articlePage.waitForTitleElement();
         articlePage.swipeArticleToTheEnd(30);
+
+        Thread.sleep(6000);
     }
 
     //Урок 4, ДЗ-2

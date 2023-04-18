@@ -115,11 +115,10 @@ abstract public class SearchPage extends CorePage {
     }
 
     public void goBackOnMainPageFromSearch() {
-        //для iOS это кнопка Close
         if(Platform.getInstance().isAndroid()) {
             this.waitForElementAndClick(ARROW_BACK_BUTTON,
                     "Not found back arrow in search results", 5);
-        } else {
+        } else if(Platform.getInstance().isIOS()) {
             this.waitForElementAndClick(SEARCH_CLOSE_BUTTON, "Not found iOS close button", 10);
         }
 
@@ -147,7 +146,6 @@ abstract public class SearchPage extends CorePage {
     }
 
     public String getTitleOfSomeArticleInResults(int numberOfArticle) {
-        //для iOS нужно по-другому - через список всех результатов
         if(Platform.getInstance().isAndroid()) {
             return this.waitForElementAndGetAttribute
                     ("xpath://*[@resource-id='" + RESULTS_LIST.split(Pattern.quote(":"), 2)[1] + "']/android.view.ViewGroup["
@@ -156,9 +154,10 @@ abstract public class SearchPage extends CorePage {
                             "text", "Cannot find an article in results", 15);
         } else {
             List<WebElement> results = this.getAllSearchResults();
-            return results.get(numberOfArticle-1).getAttribute("name");
+            if (Platform.getInstance().isIOS()) {
+                return results.get(numberOfArticle-1).getAttribute("name");}
+            else return results.get(numberOfArticle-1).getAttribute("data-title");
         }
-
     }
 
     public void clearQueryInput() {
@@ -166,8 +165,7 @@ abstract public class SearchPage extends CorePage {
     }
 
     public List<WebElement> getAllSearchResults() {
-        this.waitForElementPresent(RESULTS_LIST, "Not present result list");
-        WebElement resultsList = driver.findElement(this.getLocatorByString(RESULTS_LIST));
+        WebElement resultsList = this.waitForElementPresent(RESULTS_LIST, "Not present result list");
         By by = this.getLocatorByString(ANY_RESULT);
         return resultsList.findElements(by);
     }

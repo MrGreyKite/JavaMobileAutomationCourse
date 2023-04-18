@@ -5,24 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb27cbd3-4b89-48b9-ab6a-4d01a6a8988f" name="Changes" comment="ДЗ-9 - часть с тестом на три результата поиска">
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebArticlePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebMySavedListsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebSearchPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/AuthorizationPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebNavigation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/suits/TestSuitForMobileWeb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/CoreTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/Platform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/Platform.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/ArticlePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/CorePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/MySavedListsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/NavigationPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/SearchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/WelcomeScreenPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/android/AndroidArticlePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/factories/ArticlePageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/ArticlePageFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/factories/MySavedListsPageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/MySavedListsPageFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/factories/NavigationPanelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/NavigationPanelFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/factories/SearchPageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/factories/SearchPageFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/SearchTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/SearchTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebArticlePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebArticlePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebMySavedListsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/lib/pages/mobileWeb/MobileWebMySavedListsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ArticleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ArticleTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ListsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ListsTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +60,8 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.SearchTests.testAbortSearchAttempt">
-    <configuration name="SearchTests.testAbortSearchAttempt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ListsTests.testOnSaveTwoArticlesAndDeleteOne">
+    <configuration name="ArticleTests.testSwipeArticleToTheEnd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaMobileAutomationCourse" />
       <extension name="coverage">
         <pattern>
@@ -70,8 +70,65 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.SearchTests" />
-      <option name="METHOD_NAME" value="testAbortSearchAttempt" />
+      <option name="MAIN_CLASS_NAME" value="tests.ArticleTests" />
+      <option name="METHOD_NAME" value="testSwipeArticleToTheEnd" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="PLATFORM" value="mobile_web" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ListsTests.testOnSaveTwoArticlesAndDeleteOne" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.ListsTests" />
+      <option name="METHOD_NAME" value="testOnSaveTwoArticlesAndDeleteOne" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="PLATFORM" value="mobile_web" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ListsTests.testSaveArticleAndDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.ListsTests" />
+      <option name="METHOD_NAME" value="testSaveArticleAndDelete" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="PLATFORM" value="mobile_web" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ListsTests.testSaveFirstArticleInDefaultList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaMobileAutomationCourse" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.ListsTests" />
+      <option name="METHOD_NAME" value="testSaveFirstArticleInDefaultList" />
       <option name="TEST_OBJECT" value="method" />
       <envs>
         <env name="PLATFORM" value="mobile_web" />
@@ -99,63 +156,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchTests.testDoSearchAndFindResults" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.SearchTests" />
-      <option name="METHOD_NAME" value="testDoSearchAndFindResults" />
-      <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="PLATFORM" value="mobile_web" />
-      </envs>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchTests.testEmptySearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.SearchTests" />
-      <option name="METHOD_NAME" value="testEmptySearch" />
-      <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="PLATFORM" value="mobile_web" />
-      </envs>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchTests.testOnFirstThreeResultsOfSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaMobileAutomationCourse" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.SearchTests" />
-      <option name="METHOD_NAME" value="testOnFirstThreeResultsOfSearch" />
-      <option name="TEST_OBJECT" value="method" />
-      <envs>
-        <env name="PLATFORM" value="mobile_web" />
-      </envs>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="JavaMobileAutomationCourse" />
       <option name="PACKAGE_NAME" value="" />
@@ -171,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SearchTests.testAbortSearchAttempt" />
-        <item itemvalue="JUnit.SearchTests.testOnFirstThreeResultsOfSearch" />
-        <item itemvalue="JUnit.SearchTests.testDoSearchAndFindResults" />
+        <item itemvalue="JUnit.ListsTests.testOnSaveTwoArticlesAndDeleteOne" />
+        <item itemvalue="JUnit.ListsTests.testSaveArticleAndDelete" />
+        <item itemvalue="JUnit.ListsTests.testSaveFirstArticleInDefaultList" />
         <item itemvalue="JUnit.SearchTests.testDoSearchAndClearInput" />
-        <item itemvalue="JUnit.SearchTests.testEmptySearch" />
+        <item itemvalue="JUnit.ArticleTests.testSwipeArticleToTheEnd" />
       </list>
     </recent_temporary>
   </component>
@@ -342,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681013846625</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="ДЗ-9 - часть с тестом на три результата поиска">
+      <created>1681510035582</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1681510035582</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -1,14 +1,25 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import lib.CoreTest;
 import lib.pages.ArticlePage;
 import lib.pages.SearchPage;
 import lib.pages.factories.SearchPageFactory;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("only Android/iOS apps")
+@Epic("Side influence on app")
 public class ChangeAppConditionsTests extends CoreTest {
     @Test
+    @DisplayName("Test for change screen orientation - 1")
+    @Description("Asserting that change orientation does not affect an article page")
+    @Severity(SeverityLevel.CRITICAL)
     void testChangeScreenOrientationOnArticlePage() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
@@ -22,6 +33,9 @@ public class ChangeAppConditionsTests extends CoreTest {
     }
 
     @Test
+    @DisplayName("Test for change screen orientation - 2")
+    @Description("Asserting that change orientation does not affect results page")
+    @Severity(SeverityLevel.CRITICAL)
     void testChangeScreenOrientationOnResultsPage() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
@@ -33,6 +47,8 @@ public class ChangeAppConditionsTests extends CoreTest {
     }
 
     @Test
+    @DisplayName("Test for putting the app in the background")
+    @Severity(SeverityLevel.MINOR)
     void testReturnAppFromBackground() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");

@@ -3,16 +3,19 @@ package lib.pages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
+import io.qameta.allure.Attachment;
 import lib.Platform;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -73,7 +76,7 @@ public class CorePage {
         if (Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
             System.out.println("Not apply to " + Platform.getInstance().getPlatform());
         } else {
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            JavascriptExecutor executor = driver;
             executor.executeScript("window.scrollBy(0,250)");
         }
     }
@@ -151,9 +154,11 @@ public class CorePage {
         return elements.size();
     }
     public void assertElementNotPresent(String stringLocator) {
+        Assertions.assertEquals(0, getAmountOfElements(stringLocator), "Element(s) with locator '" + stringLocator + "' should be not present");
+    /*
         if (getAmountOfElements(stringLocator) > 0) {
             throw new AssertionError("Element(s) with locator '" + stringLocator + "' should be not present");
-        }
+        } */
     }
 
 
@@ -198,6 +203,31 @@ public class CorePage {
                 throw new IllegalArgumentException("Cannot get type of locator");
         }
 
+    }
+
+    public String takeScreenshot(String name) {
+        TakesScreenshot ts = this.driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "/" + name + "_screen.png";
+        try {
+            FileUtils.copyFile(source, new File(path));
+            System.out.println("The screenshot was taken: " + path);
+        } catch (IOException e) {
+            System.out.println("Cannot take screenshot: " + e.getMessage());
+        }
+        return path;
+    }
+
+    @Attachment
+    public static byte[] screenshot(String path) {
+        byte[] bytes = new byte[0];
+
+        try {
+            bytes = Files.readAllBytes(Paths.get(path));
+        } catch (IOException e) {
+            System.out.println("Cannot get bytes for the screenshot: " + e.getMessage());
+        }
+        return bytes;
     }
 
 

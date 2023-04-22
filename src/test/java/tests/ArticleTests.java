@@ -1,15 +1,25 @@
 package tests;
 
+import io.qameta.allure.*;
 import lib.CoreTest;
 import lib.Platform;
 import lib.pages.ArticlePage;
 import lib.pages.SearchPage;
 import lib.pages.factories.SearchPageFactory;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lib.pages.CorePage.screenshot;
+
+@Epic("Tests for articles")
+@DisplayName("Article Tests")
 public class ArticleTests extends CoreTest {
 
     @Test
+    @Features({@Feature("Search"), @Feature("Article view")})
+    @DisplayName("Test for title in search results and in article page are identical")
+    @Description("Opening a some article")
+    @Severity(SeverityLevel.BLOCKER)
     void testCompareArticleTitle() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Java");
@@ -37,19 +47,26 @@ public class ArticleTests extends CoreTest {
     */
 
     @Test
-    void testSwipeArticleToTheEnd() throws InterruptedException {
+    @Features({@Feature("Article view"), @Feature("Scrolling")})
+    @DisplayName("Test for ability to swipe an article")
+    @Description("It opens an article and swipes it to the end")
+    @Severity(SeverityLevel.MINOR)
+    void testSwipeArticleToTheEnd() {
         String searchQuery = "Java";
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput(searchQuery);
         ArticlePage articlePage = searchPage.clickOnSearchResultByTitle("Java (programming language)");
+        screenshot(articlePage.takeScreenshot("opened_page_" + searchQuery));
         articlePage.waitForTitleElement();
-        articlePage.swipeArticleToTheEnd(30);
+        articlePage.swipeArticleToTheEnd(30); //not working on Mobile Web as should
 
-        Thread.sleep(6000);
     }
 
     //Урок 4, ДЗ-2
     @Test
+    @Features({@Feature("Search"), @Feature("Article view")})
+    @DisplayName("Test for existing a title element in the article")
+    @Severity(SeverityLevel.NORMAL)
     void testRandomArticleHasTitle() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Appium");

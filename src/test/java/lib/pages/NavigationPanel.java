@@ -1,6 +1,7 @@
 package lib.pages;
 
 import io.appium.java_client.AppiumDriver;
+import io.qameta.allure.Step;
 import lib.pages.factories.MySavedListsPageFactory;
 import lib.pages.factories.NavigationPanelFactory;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ abstract public class NavigationPanel extends CorePage {
 
     protected static String OPEN_MENU, TAB_LISTS, LOGIN;
 
+    @Step("Select tab 'Saved' on navigation menu")
     public MySavedListsPage selectSavedListsTab() {
         WebElement saved = this.waitForElementPresent(TAB_LISTS, "Not found Saved tab", 5);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -24,10 +26,12 @@ abstract public class NavigationPanel extends CorePage {
         return MySavedListsPageFactory.get(driver);
     }
 
+    @Step("Open menu")
     public void openMenu() {
         this.waitForElementAndClick(OPEN_MENU, "Cannot open menu", 5);
     }
 
+    @Step("Click Login on navigation menu")
     public AuthorizationPage clickLogIn() {
         WebElement login = this.waitForElementPresent(LOGIN, "Cannot find login button", 15);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));

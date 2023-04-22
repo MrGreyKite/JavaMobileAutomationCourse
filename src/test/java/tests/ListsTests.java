@@ -1,15 +1,23 @@
 package tests;
 
+import io.qameta.allure.*;
 import lib.CoreTest;
 import lib.Platform;
 import lib.pages.*;
 import lib.pages.factories.NavigationPanelFactory;
 import lib.pages.factories.SearchPageFactory;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Epic("Behavior of lists (saved articles)")
+@DisplayName("My Lists Tests")
 public class ListsTests extends CoreTest {
 
     @Test
+    @Features({@Feature("Search"), @Feature("Actions with article"), @Feature("Navigation"), @Feature("Authorization"),
+            @Feature("Lists of saved articles")})
+    @DisplayName("Test for saving a found article in default list for saved articles")
+    @Severity(SeverityLevel.CRITICAL)
     void testSaveFirstArticleInDefaultList() {
         SearchPage searchPage = SearchPageFactory.get(driver);
         searchPage.searchSomethingOnInput("Appium");
@@ -42,6 +50,10 @@ public class ListsTests extends CoreTest {
     }
 
     @Test
+    @Features({@Feature("Search"), @Feature("Actions with article"), @Feature("Navigation"), @Feature("Authorization"),
+            @Feature("Lists of saved articles")})
+    @DisplayName("Test for ability to delete previously saved article from list")
+    @Severity(SeverityLevel.NORMAL)
     void testSaveArticleAndDelete() {
         NavigationPanel navPanel = NavigationPanelFactory.get(driver);
 
@@ -88,6 +100,11 @@ public class ListsTests extends CoreTest {
 
     //Урок 4, ДЗ-1
     @Test
+    @Features({@Feature("Search"), @Feature("Actions with article"), @Feature("Navigation"), @Feature("Authorization"),
+            @Feature("Lists of saved articles")})
+    @DisplayName("Test for ability to delete one specific article from list and not touch another articles in that list")
+    @Description("Save and delete with custom list (except for mobile Web")
+    @Severity(SeverityLevel.NORMAL)
     void testOnSaveTwoArticlesAndDeleteOne() {
         String searchQuery;
         if(Platform.getInstance().isAndroid() || Platform.getInstance().isMW()) {
